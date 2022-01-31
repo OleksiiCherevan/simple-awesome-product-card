@@ -1,4 +1,4 @@
-import "./style.scss";
+ import "./style.scss";
 
 import CardPrice from "./../../atoms/CardPrice";
 import CardLabel from "../../atoms/CardLabel";
@@ -9,7 +9,10 @@ export default function ProductCard() {
     return (
         <div className="product-card">
             <div className="product-card__image-wrapper">
-                <img className="product-card__image" src={productImg} alt="short descripiton" />
+                <img className="product-card__image" src={productImg}  alt="short descripiton" />
+            </div>
+            <div className="product-card__gradient">
+
             </div>
             <div className="product-card__price-wrapper">
                 <CardPrice></CardPrice>
