@@ -1,0 +1,16 @@
+@import "./../../assets/scss/main.scss";
+
+.card-button {
+    height: toRem(30);
+    width: toRem(30);
+
+    display: flex;
+
+    background: rgba(19, 17, 29, 0.36);
+    border-radius: 100%;
+
+    & svg {
+        display: block;
+        margin: auto;
+    }
+}
