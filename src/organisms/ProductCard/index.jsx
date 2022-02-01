@@ -36,7 +36,7 @@ export default function ProductCard(props) {
 
     return (
         <div
-            className="product-card"
+            className={"product-card"} 
             onMouseEnter={onEnterCard}
             onMouseLeave={onLeaveCard}
         >

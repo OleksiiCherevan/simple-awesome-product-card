@@ -29,6 +29,7 @@ const Home = () => {
     return (
         <div className="home">
             <ProductCard {...product}></ProductCard>
+            <ProductCard {...product} isOutOfStock={true}></ProductCard>
         </div>
     );
 };

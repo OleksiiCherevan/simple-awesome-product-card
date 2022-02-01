@@ -5,9 +5,16 @@
     height: toRem(160);
     width: toRem(258);
 
+    &_out-of-stock {
+        opacity: 0.3;
+    }
+
     &__image {
-        width: 100%;
         height: 100%;
+        width: calc(100% - 2px);
+
+        position: absolute;
+        left: 2px;
 
         border-radius: 5px;
         &-wrapper {
@@ -23,8 +30,8 @@
         background: linear-gradient(180deg, rgba(19, 17, 29, 0) 0%, rgba(19, 17, 29, 0.26) 49.48%, #13111d 100%);
     }
     &__price-wrapper {
-        position: absolute;
-        left: toRem(-2);
+        position: relative;
+        left: toRem(0);
         top: toRem(93);
     }
 
@@ -47,9 +54,17 @@
     }
 
     &__attributes-wrapper {
+        position: relative;
+        top: 8.5rem;
+
+        background: #13111D ;
+        
         display: flex;
         flex-direction: column;
+
         gap: 5px;
+
+        margin-bottom: toRem(10px);
     }
 
     &__attribute-items-wrapper {
@@ -68,7 +83,7 @@
     &__out-of-stock {
         position: absolute;
         height: 100%;
-        width: 100%;
+        width: 17rem;
         top: 0;
         left: 0;
         
