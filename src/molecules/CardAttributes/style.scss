@@ -1,0 +1,29 @@
+@import './../../assets/scss/main.scss';
+
+
+.card-attributes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 0.5rem;
+
+    &__button {
+        height: toRem(24);
+        width: toRem(24);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &_left {
+        
+        }
+    
+        &_right {
+
+        }
+    }
+
+   
+}

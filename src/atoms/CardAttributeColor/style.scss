@@ -1,0 +1,28 @@
+@import "./../../assets/scss/main.scss";
+
+.card-attribute-color {
+    border-radius: 50%;
+    height: toRem(20);
+    width: toRem(20);
+
+    &_selected {
+        position: relative;
+
+        border: toRem(1.5) solid red;
+
+        width: toRem(22);
+        height: toRem(22);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    &__inner-circle {
+        height: toRem(18);
+        width: toRem(18);
+
+        border-radius: 50%;
+    }
+}

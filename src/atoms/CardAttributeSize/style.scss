@@ -1,0 +1,29 @@
+@import "./../../assets/scss/main.scss";
+
+.card-attribute-size {
+    position: relative;
+
+    border-radius: 2em;
+
+    height: 1.3rem;
+    width: 1.8rem;
+
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_selected {
+        background: linear-gradient(94.53deg, #D333F9 10.41%, #F9437E 99.34%);
+        backdrop-filter: blur(30px);
+    }
+
+    &_default {
+        border: toRem(1) solid white;
+    }
+
+
+}

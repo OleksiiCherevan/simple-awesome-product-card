@@ -1,7 +1,7 @@
 import "./style.scss";
 
 
-import ProductCard from "../../molecules/ProductCard";
+import ProductCard from "../../organisms/ProductCard";
 
 const Home = () => {
     return (
