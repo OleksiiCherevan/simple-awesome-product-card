@@ -10,10 +10,8 @@
     justify-content: center;
 
     background: rgba(255, 255, 255, 0.09);
-    /* Blur */
     color: white;
     backdrop-filter: blur(30px);
-    /* Note: backdrop-filter has minimal browser support */
     border-radius: toRem(1.5) toRem(5) toRem(5) toRem(1.5) ;
 
     &__label {

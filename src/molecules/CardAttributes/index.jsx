@@ -5,33 +5,29 @@ import CardAttributeColor from "../../atoms/CardAttributeColor";
 import CardAttributeSize from "../../atoms/CardAttributeSize";
 
 export default function CardAttributes(props) {
-    const {
-        attributes = ["red", "tomato", "blue", "green", "white"],
-        cardAttribute,
-        defaultIndex = 0,
-    } = props;
+    const { attributes = [], cardAttribute = "", defaultIndex = 0 } = props;
 
-    const [selectIndex, setSelectIndex] = useState(-1);
-
+    const [selectIndex, setSelectIndex] = useState(0);
+    const [isDefault, setIsDefault] = useState(true);
 
     const onLeftClick = () => {
         let index = selectIndex;
         index = index - 1 >= 0 ? index - 1 : attributes.length - 1;
         setSelectIndex(index);
+        setIsDefault(false);
     };
-
 
     const onRigthClick = () => {
         let index = selectIndex;
         index = selectIndex + 1 < attributes.length ? index + 1 : 0;
         setSelectIndex(index);
+        setIsDefault(false);
     };
-
 
     const onAttributeClick = (index) => {
         setSelectIndex(index);
+        setIsDefault(false);
     };
-
 
     return (
         <div className="card-attributes disable-select">
@@ -60,13 +56,13 @@ export default function CardAttributes(props) {
                         {cardAttribute === "color" ? (
                             <CardAttributeColor
                                 value={attribute}
-                                isDefault={index === defaultIndex && selectIndex === -1}
+                                isDefault={index === defaultIndex && isDefault }
                                 isSelected={index === selectIndex}
                             />
                         ) : cardAttribute === "size" ? (
                             <CardAttributeSize
                                 value={attribute}
-                                isDefault={index === defaultIndex && selectIndex === -1}
+                                isDefault={index === defaultIndex && isDefault} 
                                 isSelected={index === selectIndex}
                             />
                         ) : null}

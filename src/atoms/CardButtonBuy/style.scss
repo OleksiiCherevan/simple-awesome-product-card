@@ -1,0 +1,13 @@
+@import "./../../assets/scss/main.scss";
+
+.cart-button-buy {
+    height: 2rem;
+    width: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(94.53deg, #d333f9 10.41%, #f9437e 99.34%);
+    border-radius: toRem(40);
+}

@@ -45,4 +45,41 @@
         right: 4.23%;
         top: 4.58%;
     }
+
+    &__attributes-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    &__attribute-items-wrapper {
+        display: flex;
+        margin: 0 toRem(5);
+
+        &_buy {
+            flex: 1;
+        }
+    }
+
+    &__attribute-items-buy {
+        flex: 1;
+    }
+
+    &__out-of-stock {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: white;
+
+        background: #13111Db0;
+    }
 }

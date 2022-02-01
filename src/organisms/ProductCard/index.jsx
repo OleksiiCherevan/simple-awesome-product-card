@@ -5,46 +5,64 @@ import { useState } from "react";
 import CardPrice from "../../atoms/CardPrice";
 import CardLabel from "../../atoms/CardLabel";
 
-import productImg from "./../../assets/img/Example.png";
 
 import CardButton from "../../atoms/CardButton";
-import CardAttributeColor from "../../atoms/CardAttributeColor";
-import CardAttributeSize from "../../atoms/CardAttributeSize";
+import CardButtonBuy from "./../../atoms/CardButtonBuy";
 import CardAttributes from "../../molecules/CardAttributes";
 
-export default function ProductCard() {
-    const [isHover, setIsHover] = useState(false);
 
-    const onEnter = (event) => {
+
+export default function ProductCard(props) {
+    const { attributes, image, name, price, isOutOfStock = false } = props;
+
+    const [isHover, setIsHover] = useState(false);
+    const [isHoverBuy, setIsHoverBuy] = useState(false);
+
+    const onEnterCard = (event) => {
         setIsHover(true);
     };
 
-    const onLeave = (event) => {
-        setIsHover(true);
+    const onLeaveCard = (event) => {
+        setIsHover(false);
+    };
+
+    const onEnterSize = () => {
+        setIsHoverBuy(true);
+    };
+
+    const onLeaveSize = () => {
+        setIsHoverBuy(false);
     };
 
     return (
         <div
             className="product-card"
-            onMouseEnter={onEnter}
-            onMouseLeave={onLeave}
+            onMouseEnter={onEnterCard}
+            onMouseLeave={onLeaveCard}
         >
             <div className="product-card__image-wrapper">
                 <img
                     className="product-card__image"
-                    src={productImg}
+                    src={image}
                     alt="short descripiton"
                 />
             </div>
+
             <div className="product-card__gradient"></div>
+
             <div className="product-card__price-wrapper">
-                <CardPrice></CardPrice>
-            </div>
-            <div className="product-card__label-wrapper">
-                <CardLabel label={"Soho Coat"}></CardLabel>
+                <CardPrice {...price}></CardPrice>
             </div>
 
-            {isHover ? (
+            <div className="product-card__label-wrapper">
+                <CardLabel label={name}></CardLabel>
+            </div>
+
+            {isOutOfStock ? (
+                <div className="product-card__out-of-stock">Out of Stock</div>
+            ) : null}
+
+            {isHover && !isOutOfStock ? (
                 <>
                     <div className="product-card__share-wrapper">
                         <CardButton>
@@ -85,12 +103,35 @@ export default function ProductCard() {
                         </CardButton>
                     </div>
 
-                    <CardAttributes cardAttribute={"color"}></CardAttributes>
+                    <div className="product-card__attributes-wrapper">
+                        {attributes.map((attribute, index) =>
+                            index !== attributes.length - 1 ? (
+                                <div className="product-card__attribute-items-wrapper">
+                                    <CardAttributes
+                                        cardAttribute={attribute.id}
+                                        attributes={attribute.items}
+                                    ></CardAttributes>
+                                </div>
+                            ) : (
+                                <div className="product-card__attribute-items-wrapper">
+                                    <div
+                                        className="product-card__attribute-items-buy"
+                                        onMouseEnter={onEnterSize}
+                                        onMouseLeave={onLeaveSize}
+                                    >
+                                        <CardAttributes
+                                            cardAttribute={attribute.id}
+                                            attributes={attribute.items}
+                                        ></CardAttributes>
+                                    </div>
 
-                    <CardAttributes
-                        attributes = {['XS', 'S', 'M', "L", "XL" ]}
-                        cardAttribute={'size'}
-                    ></CardAttributes>
+                                    {!isHoverBuy ? (
+                                        <CardButtonBuy></CardButtonBuy>
+                                    ) : null}
+                                </div>
+                            )
+                        )}
+                    </div>
                 </>
             ) : null}
         </div>

@@ -1,12 +1,12 @@
 import "./style.scss";
 
 export default function Price(props) {
-    const {symbol="$", value="301.88"} = props
+    const {symbol="", amount=0} = props
 
 
     return <div className="card-price">
         <div className="card-price__label">
-            { `${symbol}${value}`}
+            { `${symbol}${amount}`}
         </div>
     </div>;
 }

@@ -2,11 +2,13 @@
 
 
 .card-attributes {
+    flex: 1;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 
     &__button {
         height: toRem(24);
