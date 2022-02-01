@@ -20,7 +20,7 @@ const product = {
     ],
     price: {
         symbol: '$',
-        amount: '301.88,'
+        amount: '301.88'
     },
     isOutOfStock: false,
 }

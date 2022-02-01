@@ -59,7 +59,7 @@ export default function ProductCard(props) {
             </div>
 
             {isOutOfStock ? (
-                <div className="product-card__out-of-stock">Out of Stock</div>
+                <div className="product-card__out-of-stock disable-select">Out of Stock</div>
             ) : null}
 
             {isHover && !isOutOfStock ? (
