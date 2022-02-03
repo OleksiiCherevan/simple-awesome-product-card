@@ -5,7 +5,6 @@ import { useState } from "react";
 import CardPrice from "../../atoms/CardPrice";
 import CardLabel from "../../atoms/CardLabel";
 
-
 import CardButton from "../../atoms/CardButton";
 import CardButtonBuy from "./../../atoms/CardButtonBuy";
 import CardAttributes from "../../molecules/CardAttributes";
@@ -35,9 +34,15 @@ export default function ProductCard(props) {
         setIsHoverBuy(false);
     };
 
+    const isSizeVisible = () => {
+        let res = isHover && !isOutOfStock ? "visible" : "collapse";
+        console.log(res);
+        return res
+    };
+
     return (
         <div
-            className={"product-card"} 
+            className={"product-card"}
             onMouseEnter={onEnterCard}
             onMouseLeave={onLeaveCard}
         >
@@ -60,11 +65,11 @@ export default function ProductCard(props) {
             </div>
 
             {isOutOfStock ? (
-                <div className="product-card__out-of-stock disable-select">Out of Stock</div>
-            ) : null}
-
-            {isHover && !isOutOfStock ? (
-                <>
+                <div className="product-card__out-of-stock disable-select">
+                    Out of Stock
+                </div>
+            ) : (
+                <div style={{ visibility: isSizeVisible()}}>
                     <div className="product-card__share-wrapper">
                         <CardButton>
                             {
@@ -123,7 +128,6 @@ export default function ProductCard(props) {
                                         <CardAttributes
                                             cardAttribute={attribute.id}
                                             attributes={attribute.items}
-                                            
                                         ></CardAttributes>
                                     </div>
 
@@ -134,8 +138,8 @@ export default function ProductCard(props) {
                             )
                         )}
                     </div>
-                </>
-            ) : null}
+                </div>
+            )}
         </div>
     );
 }

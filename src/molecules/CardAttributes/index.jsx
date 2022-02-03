@@ -16,18 +16,34 @@ export default function CardAttributes(props) {
     const [isDefault, setIsDefault] = useState(true);
     const [currentAttributes, setCurrentAttributes] = useState(attributes);
 
+    const getRigthShiftedItems = (items, index = 0) => {
+        let oldItems = [...items];
+        let shiftedItems = oldItems.splice(0, index);
+        let newItems = oldItems.concat(shiftedItems);
+        return newItems;
+    };
+
+    const getLeftShiftedItem = (items) => {
+        let oldItems = [...items];
+        let shiftedItems = oldItems.splice(
+            oldItems.length - 1,
+            oldItems.length
+        );
+        let newItems = shiftedItems.concat(oldItems);
+        return newItems;
+    };
+
     const onLeftClick = () => {
         let index = selectIndex;
         index = index - 1 >= 0 ? index - 1 : currentAttributes.length - 1;
 
-        let oldAttributes = [...currentAttributes];
-        let shiftAttributes = oldAttributes.splice(
-            oldAttributes.length - 1,
-            oldAttributes.length
+        let shiftedItems = getRigthShiftedItems(
+            currentAttributes,
+            currentAttributes.length - 1,
+            selectIndex
         );
-        let newAttributes = shiftAttributes.concat(oldAttributes);
 
-        setCurrentAttributes(newAttributes);
+        setCurrentAttributes(shiftedItems);
         setIsDefault(false);
     };
 
@@ -35,29 +51,24 @@ export default function CardAttributes(props) {
         let index = selectIndex;
         index = selectIndex + 1 < currentAttributes.length ? index + 1 : 0;
 
-        let oldAttributes = [...currentAttributes];
-        let shiftAttributes = oldAttributes.splice(0, index);
-        let newAttributes = oldAttributes.concat(shiftAttributes);
+        let shiftedItems = getRigthShiftedItems(
+            currentAttributes,
+            index,
+            selectIndex
+        );
 
-        setCurrentAttributes(newAttributes);
+        setCurrentAttributes(shiftedItems);
         setIsDefault(false);
     };
 
     const onAttributeClick = (index) => {
-        if (index > selectIndex) {
-            let oldAttributes = [...currentAttributes];
-            let shiftAttributes = oldAttributes.splice(0, index);
-            let newAttributes = oldAttributes.concat(shiftAttributes);
-            setCurrentAttributes(newAttributes);
-        } else {
-            let oldAttributes = [...currentAttributes];
-            let shiftAttributes = oldAttributes.splice(
-                oldAttributes.length - 1,
-                oldAttributes.length
-            );
-            let newAttributes = shiftAttributes.concat(oldAttributes);
-            setCurrentAttributes(newAttributes);
-        }
+        console.log(index, selectIndex);
+        let shiftedAttributes =
+            (index <= selectIndex)
+            ? getLeftShiftedItem(currentAttributes)
+                : getRigthShiftedItems(currentAttributes, index)
+
+        setCurrentAttributes(shiftedAttributes);
 
         setIsDefault(false);
     };
