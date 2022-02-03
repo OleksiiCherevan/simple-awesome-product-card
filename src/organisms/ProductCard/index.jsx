@@ -16,7 +16,7 @@ export default function ProductCard(props) {
     const { attributes, image, name, price, isOutOfStock = false } = props;
 
     const [isHover, setIsHover] = useState(false);
-    const [isHoverBuy, setIsHoverBuy] = useState(false);
+    const [isHoverLastAttributes, setIsHoverLastAttributes] = useState(false);
 
     const onEnterCard = (event) => {
         setIsHover(true);
@@ -27,11 +27,11 @@ export default function ProductCard(props) {
     };
 
     const onEnterSize = () => {
-        setIsHoverBuy(true);
+        setIsHoverLastAttributes(true);
     };
 
     const onLeaveSize = () => {
-        setIsHoverBuy(false);
+        setIsHoverLastAttributes(false);
     };
 
     return (
@@ -107,10 +107,13 @@ export default function ProductCard(props) {
                         </CardButton>
                     </div>
 
+
+                    {/* Show buttons and attributes  */}
                     <div className="product-card__attributes-wrapper">
                         {attributes.map((attribute, index) => (
                             // Check is it the last attributes?
                             <>
+                                {/* If it isn`t the last element we`ll show default attributes and if it`s w`ll show attributes with buy button */}
                                 {index !== attributes.length - 1 ? (
                                     <div className="product-card__attribute-items-wrapper">
                                         <CardAttributes
@@ -120,7 +123,8 @@ export default function ProductCard(props) {
                                     </div>
                                 ) : (
                                     <>
-                                        {!isHoverBuy ? (
+                                        {/* I check does mouse enter the last elemnt */}
+                                        {!isHoverLastAttributes ? (
                                             <div className="product-card__attribute-items-wrapper">
                                                 <div
                                                     className="product-card__attribute-items-buy"

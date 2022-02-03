@@ -5,7 +5,12 @@ import CardAttributeColor from "../../atoms/CardAttributeColor";
 import CardAttributeSize from "../../atoms/CardAttributeSize";
 
 export default function CardAttributes(props) {
-    const { attributes = [], cardAttribute = "", defaultIndex = 0, attributesCount  } = props;
+    const {
+        attributes = [],
+        cardAttribute = "",
+        defaultIndex = 0,
+        attributesCount,
+    } = props;
 
     const [selectIndex, setSelectIndex] = useState(0);
     const [isDefault, setIsDefault] = useState(true);
@@ -50,20 +55,25 @@ export default function CardAttributes(props) {
                 </svg>
             </div>
 
+        
             {attributes.map((attribute, index) => {
-                console.log(attributesCount);
                 return (
-                    <div onClick={() => onAttributeClick(index)}>
+                    <div
+                        onClick={() => onAttributeClick(index)}
+                    >
                         {cardAttribute === "color" ? (
                             <CardAttributeColor
+                                key={attribute}
                                 value={attribute}
-                                isDefault={index === defaultIndex && isDefault }
+                                isDefault={index === defaultIndex && isDefault}
                                 isSelected={index === selectIndex}
                             />
-                        ) : (cardAttribute === "size" && index < attributesCount) ? (
+                        ) : cardAttribute === "size" &&
+                          index < attributesCount ? (
                             <CardAttributeSize
+                                key={attribute}
                                 value={attribute}
-                                isDefault={index === defaultIndex && isDefault} 
+                                isDefault={index === defaultIndex && isDefault}
                                 isSelected={index === selectIndex}
                             />
                         ) : null}
