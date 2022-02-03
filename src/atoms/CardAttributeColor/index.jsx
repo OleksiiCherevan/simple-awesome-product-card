@@ -1,7 +1,7 @@
 import "./style.scss";
 
 export default function CardAttributeColor(props) {
-    const { attribute = {}, value: color , isSelected, isDefault } = props;
+    const { value: color , isSelected, isDefault } = props;
     // const { value } = attribute
 
     if (isDefault) {
