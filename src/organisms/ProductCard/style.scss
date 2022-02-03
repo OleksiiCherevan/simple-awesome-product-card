@@ -1,24 +1,18 @@
 @import "./../../assets/scss/main.scss";
 
+$out-color: #13111Db0;
+
 .product-card {
     position: relative;
     height: toRem(160);
     width: toRem(258);
 
-    &_out-of-stock {
-        opacity: 0.3;
-    }
-
     &__image {
         height: 100%;
-        width: calc(100% - 2px);
-
+        width: 100%;
         position: absolute;
-        left: toRem(2);
 
         border-radius: toRem(5);
-        &-wrapper {
-        }
     }
 
     &__gradient {
@@ -27,12 +21,26 @@
         width: 100%;
         left: 0;
         bottom: 0;
-        background: linear-gradient(180deg, rgba(19, 17, 29, 0) 0%, rgba(19, 17, 29, 0.26) 49.48%, #13111d 100%);
+        border-radius: toRem(5);
+        background: linear-gradient(180deg, rgba(19, 17, 29, 0) 0%, rgba(19, 17, 29, 0.3) 49.48%, #13111d 100%);
     }
+    
     &__price-wrapper {
         position: relative;
-        left: toRem(0);
+        left: toRem(-2);
         top: toRem(93);
+
+        
+    }
+    
+    &__price-out-of-stock {
+        position: relative;
+        left: toRem(-2);
+        top: toRem(68);
+        border-radius: toRem(2) 0 0 toRem(2);
+        height: 25px;
+        width: 2px;
+        background: $out-color;
     }
 
     &__label-wrapper {
@@ -55,16 +63,16 @@
 
     &__attributes-wrapper {
         position: relative;
-        top: 8.5rem;
+        top: 8.4rem;
 
         background: #13111D ;
         
         display: flex;
         flex-direction: column;
 
-        // gap: 0.3rem;
+        border-radius: 0 0 toRem(5) toRem(5) ;
 
-        margin-bottom: toRem(10px);
+        padding-bottom: toRem(10);
     }
 
     &__attribute-items-wrapper {
@@ -84,9 +92,12 @@
     &__out-of-stock {
         position: absolute;
         height: 100%;
-        width: 17rem;
+        width: 100%;
+        border-radius: toRem(5);
         top: 0;
         left: 0;
+
+
         
         display: flex;
         align-items: center;
@@ -96,6 +107,6 @@
         font-weight: 700;
         color: white;
 
-        background: #13111Db0;
+        background: $out-color;
     }
 }

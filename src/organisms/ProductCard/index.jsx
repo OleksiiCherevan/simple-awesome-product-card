@@ -34,9 +34,9 @@ export default function ProductCard(props) {
         setIsHoverBuy(false);
     };
 
-    const isSizeVisible = () => {
-        return isHover && !isOutOfStock ? "visible" : "collapse";
-    };
+    const getSizeVisibilityStyle = () => (isHover && !isOutOfStock ? "visible" : "collapse");
+
+    const getBorderStyle = () => (isHover && !isOutOfStock ? 0 : " 0 0 0.33rem 0.33rem");
 
     return (
         <div
@@ -50,9 +50,11 @@ export default function ProductCard(props) {
                     src={image}
                     alt="short descripiton"
                 />
+                <div
+                    className="product-card__gradient"
+                    style={{ borderRadius: getBorderStyle() }}
+                ></div>
             </div>
-
-            <div className="product-card__gradient"></div>
 
             <div className="product-card__price-wrapper">
                 <CardPrice {...price}></CardPrice>
@@ -63,12 +65,14 @@ export default function ProductCard(props) {
             </div>
 
             {isOutOfStock ? (
-                <div className="product-card__out-of-stock disable-select">
-                    Out of Stock
-                </div>
+                <>
+                    <div className="product-card__out-of-stock disable-select">
+                        Out of Stock
+                    </div>
+                    <div className="product-card__price-out-of-stock"></div>
+                </>
             ) : (
-
-                <div style={{ visibility: isSizeVisible()}}>
+                <div style={{ visibility: getSizeVisibilityStyle() }}>
                     <div className="product-card__share-wrapper">
                         <CardButton>
                             {
@@ -138,10 +142,8 @@ export default function ProductCard(props) {
                             )
                         )}
                     </div>
-
                 </div>
             )}
-            
         </div>
     );
 }
