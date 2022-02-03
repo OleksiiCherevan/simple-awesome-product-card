@@ -14,48 +14,55 @@ export default function CardAttributes(props) {
 
     const [selectIndex, setSelectIndex] = useState(defaultIndex);
     const [isDefault, setIsDefault] = useState(true);
-    const [currentAttributes, setCurrentAttributes] = useState(attributes) 
+    const [currentAttributes, setCurrentAttributes] = useState(attributes);
 
     const onLeftClick = () => {
         let index = selectIndex;
         index = index - 1 >= 0 ? index - 1 : currentAttributes.length - 1;
 
-        let oldAttributes = [...currentAttributes]
-        let shiftAttributes = oldAttributes.splice(oldAttributes.length-1, oldAttributes.length )
-        let newAttributes = shiftAttributes.concat(oldAttributes)
-        
-        setCurrentAttributes(newAttributes)
+        let oldAttributes = [...currentAttributes];
+        let shiftAttributes = oldAttributes.splice(
+            oldAttributes.length - 1,
+            oldAttributes.length
+        );
+        let newAttributes = shiftAttributes.concat(oldAttributes);
+
+        setCurrentAttributes(newAttributes);
         setIsDefault(false);
     };
 
     const onRigthClick = () => {
         let index = selectIndex;
         index = selectIndex + 1 < currentAttributes.length ? index + 1 : 0;
-      
-        let oldAttributes = [...currentAttributes]
-        let shiftAttributes = oldAttributes.splice(0, index-1 )
-        let newAttributes = oldAttributes.concat(shiftAttributes)
 
+        let oldAttributes = [...currentAttributes];
+        let shiftAttributes = oldAttributes.splice(0, index - 1);
+        let newAttributes = oldAttributes.concat(shiftAttributes);
 
-        setCurrentAttributes(newAttributes)
+        setCurrentAttributes(newAttributes);
         setIsDefault(false);
     };
 
     const onAttributeClick = (index) => {
+        if (index > selectIndex) {
+            let oldAttributes = [...currentAttributes];
+            let shiftAttributes = oldAttributes.splice(0, index - 1);
+            let newAttributes = oldAttributes.concat(shiftAttributes);
+            setCurrentAttributes(newAttributes);
+        } else {
+            let oldAttributes = [...currentAttributes];
+            let shiftAttributes = oldAttributes.splice(
+                oldAttributes.length - 1,
+                oldAttributes.length
+            );
+            let newAttributes = shiftAttributes.concat(oldAttributes);
+            setCurrentAttributes(newAttributes);
+        }
 
-        let oldAttributes = [...currentAttributes]
-        let shiftAttributes = oldAttributes.splice(0, index-1 )
-        let newAttributes = oldAttributes.concat(shiftAttributes)
-
-        // setSelectIndex(index);
-
-        setCurrentAttributes(newAttributes)
         setIsDefault(false);
     };
 
-    useEffect(() => {
-       
-    }, [selectIndex])
+    useEffect(() => {}, [selectIndex]);
 
     return (
         <div className="card-attributes disable-select">

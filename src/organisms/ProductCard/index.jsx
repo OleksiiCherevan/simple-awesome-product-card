@@ -24,7 +24,7 @@ export default function ProductCard(props) {
     };
 
     const onLeaveCard = (event) => {
-        setIsHover(true);
+        setIsHover(false);
     };
 
     const onEnterSize = () => {
