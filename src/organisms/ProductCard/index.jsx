@@ -36,7 +36,7 @@ export default function ProductCard(props) {
 
     const getSizeVisibilityStyle = () => (isHover && !isOutOfStock ? "visible" : "collapse");
 
-    const getBorderStyle = () => (isHover && !isOutOfStock ? 0 : " 0 0 0.33rem 0.33rem");
+    const getBorderStyle = () => (isHover && !isOutOfStock ? 0 : " 0 0 0.24rem 0.24rem");
 
     return (
         <div

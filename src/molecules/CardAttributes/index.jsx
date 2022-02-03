@@ -12,7 +12,7 @@ export default function CardAttributes(props) {
         attributesCount = 10,
     } = props;
 
-    const [selectIndex] = useState(defaultIndex);
+    const [selectIndex, setSelectedIndex] = useState(defaultIndex);
     const [isDefault, setIsDefault] = useState(true);
     const [currentAttributes, setCurrentAttributes] = useState(attributes);
 
@@ -34,13 +34,9 @@ export default function CardAttributes(props) {
     };
 
     const onLeftClick = () => {
-        // let index = selectIndex;
-        // index = index - 1 >= 0 ? index - 1 : currentAttributes.length - 1;
-
         let shiftedItems = getRigthShiftedItems(
             currentAttributes,
-            currentAttributes.length - 1,
-            selectIndex
+            currentAttributes.length - 1
         );
 
         setCurrentAttributes(shiftedItems);
@@ -48,13 +44,9 @@ export default function CardAttributes(props) {
     };
 
     const onRigthClick = () => {
-        let index = selectIndex;
-        index = selectIndex + 1 < currentAttributes.length ? index + 1 : 0;
-
         let shiftedItems = getRigthShiftedItems(
             currentAttributes,
-            index,
-            selectIndex
+            1
         );
 
         setCurrentAttributes(shiftedItems);
@@ -63,14 +55,31 @@ export default function CardAttributes(props) {
 
     const onAttributeClick = (index) => {
         console.log(index, selectIndex);
-        let shiftedAttributes =
-            (index <= selectIndex)
-            ? getLeftShiftedItem(currentAttributes)
-                : getRigthShiftedItems(currentAttributes, index)
+        setIsDefault(false);
+
+        let shiftedAttributes = currentAttributes;
+
+            if(index == currentAttributes.length - 1) {
+
+                shiftedAttributes = getRigthShiftedItems(
+                    currentAttributes,
+                    1,
+                    selectIndex
+                );
+                
+                setSelectedIndex(index - 1)
+            }
+            else if(index ==0) {
+                shiftedAttributes = getLeftShiftedItem(currentAttributes)
+
+                setSelectedIndex(index + 1)
+            }
+            else {
+
+         setSelectedIndex(index)
+            }
 
         setCurrentAttributes(shiftedAttributes);
-
-        setIsDefault(false);
     };
 
     useEffect(() => {}, [selectIndex]);

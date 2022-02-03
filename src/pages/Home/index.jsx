@@ -11,7 +11,7 @@ const product = {
     attributes: [
         {
             id: "color",
-            items: ["red", "tomato", "blue", "green", "white"],
+            items: ["red", "tomato", "yellow", "green", "blue"],
         },
         {
             id: "size",
