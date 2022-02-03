@@ -35,9 +35,7 @@ export default function ProductCard(props) {
     };
 
     const isSizeVisible = () => {
-        let res = isHover && !isOutOfStock ? "visible" : "collapse";
-        console.log(res);
-        return res
+        return isHover && !isOutOfStock ? "visible" : "collapse";
     };
 
     return (
@@ -69,6 +67,7 @@ export default function ProductCard(props) {
                     Out of Stock
                 </div>
             ) : (
+
                 <div style={{ visibility: isSizeVisible()}}>
                     <div className="product-card__share-wrapper">
                         <CardButton>
@@ -89,6 +88,7 @@ export default function ProductCard(props) {
                             }
                         </CardButton>
                     </div>
+
                     <div className="product-card__favorite-wrapper">
                         <CardButton>
                             {
@@ -138,8 +138,10 @@ export default function ProductCard(props) {
                             )
                         )}
                     </div>
+
                 </div>
             )}
+            
         </div>
     );
 }
