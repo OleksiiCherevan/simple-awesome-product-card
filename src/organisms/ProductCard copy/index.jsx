@@ -5,7 +5,6 @@ import { useState } from "react";
 import CardPrice from "../../atoms/CardPrice";
 import CardLabel from "../../atoms/CardLabel";
 
-
 import CardButton from "../../atoms/CardButton";
 import CardButtonBuy from "./../../atoms/CardButtonBuy";
 import CardAttributes from "../../molecules/CardAttributes";
@@ -17,27 +16,27 @@ export default function ProductCard(props) {
     const { attributes, image, name, price, isOutOfStock = false } = props;
 
     const [isHover, setIsHover] = useState(false);
-    const [isHoverBuy, setIsHoverBuy] = useState(false);
+    const [isHoverLastAttributes, setIsHoverLastAttributes] = useState(false);
 
     const onEnterCard = (event) => {
         setIsHover(true);
     };
 
     const onLeaveCard = (event) => {
-        setIsHover(true);
+        setIsHover(false);
     };
 
     const onEnterSize = () => {
-        setIsHoverBuy(true);
+        setIsHoverLastAttributes(true);
     };
 
     const onLeaveSize = () => {
-        setIsHoverBuy(false);
+        setIsHoverLastAttributes(false);
     };
 
     return (
         <div
-            className={"product-card"} 
+            className={"product-card"}
             onMouseEnter={onEnterCard}
             onMouseLeave={onLeaveCard}
         >
@@ -60,9 +59,12 @@ export default function ProductCard(props) {
             </div>
 
             {isOutOfStock ? (
-                <div className="product-card__out-of-stock disable-select">Out of Stock</div>
+                <div className="product-card__out-of-stock disable-select">
+                    Out of Stock
+                </div>
             ) : null}
 
+            {/* Show buttons and attributes  */}
             {isHover && !isOutOfStock ? (
                 <>
                     <div className="product-card__share-wrapper">
@@ -84,6 +86,7 @@ export default function ProductCard(props) {
                             }
                         </CardButton>
                     </div>
+
                     <div className="product-card__favorite-wrapper">
                         <CardButton>
                             {
@@ -104,35 +107,69 @@ export default function ProductCard(props) {
                         </CardButton>
                     </div>
 
+
+                    {/* Show buttons and attributes  */}
                     <div className="product-card__attributes-wrapper">
-                        {attributes.map((attribute, index) =>
-                            index !== attributes.length - 1 ? (
-                                <div className="product-card__attribute-items-wrapper">
-                                    <CardAttributes
-                                        cardAttribute={attribute.id}
-                                        attributes={attribute.items}
-                                    ></CardAttributes>
-                                </div>
-                            ) : (
-                                <div className="product-card__attribute-items-wrapper">
-                                    <div
-                                        className="product-card__attribute-items-buy"
-                                        onMouseEnter={onEnterSize}
-                                        onMouseLeave={onLeaveSize}
-                                    >
+                        {attributes.map((attribute, index) => (
+                            // Check is it the last attributes?
+                            <>
+                                {/* If it isn`t the last element we`ll show default attributes and if it`s w`ll show attributes with buy button */}
+                                {index !== attributes.length - 1 ? (
+                                    <div className="product-card__attribute-items-wrapper">
                                         <CardAttributes
                                             cardAttribute={attribute.id}
                                             attributes={attribute.items}
-                                            
                                         ></CardAttributes>
                                     </div>
-
-                                    {!isHoverBuy ? (
-                                        <CardButtonBuy></CardButtonBuy>
-                                    ) : null}
-                                </div>
-                            )
-                        )}
+                                ) : (
+                                    <>
+                                        {/* I check does mouse enter the last elemnt */}
+                                        {!isHoverLastAttributes ? (
+                                            <div className="product-card__attribute-items-wrapper">
+                                                <div
+                                                    className="product-card__attribute-items-buy"
+                                                    onMouseEnter={onEnterSize}
+                                                    onMouseLeave={onLeaveSize}
+                                                >
+                                                    <CardAttributes
+                                                        cardAttribute={
+                                                            attribute.id
+                                                        }
+                                                        attributes={
+                                                            attribute.items
+                                                        }
+                                                        attributesCount={
+                                                            DEFAULT_ATTRIBUTES_COUNT
+                                                        }
+                                                    ></CardAttributes>
+                                                </div>
+                                                <CardButtonBuy></CardButtonBuy>
+                                            </div>
+                                        ) : (
+                                            <div className="product-card__attribute-items-wrapper">
+                                                <div
+                                                    className="product-card__attribute-items-buy"
+                                                    onMouseEnter={onEnterSize}
+                                                    onMouseLeave={onLeaveSize}
+                                                >
+                                                    <CardAttributes
+                                                        cardAttribute={
+                                                            attribute.id
+                                                        }
+                                                        attributes={
+                                                            attribute.items
+                                                        }
+                                                        attributesCount={
+                                                            MAX_ATTRIBUTES_COUNT
+                                                        }
+                                                    ></CardAttributes>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        ))}
                     </div>
                 </>
             ) : null}

@@ -3,10 +3,13 @@
 .card-attribute-size {
     position: relative;
 
-    border-radius: 2em;
+    margin-top: 0.2rem;
 
     height: 1.3rem;
     width: 1.8rem;
+    max-width: 1.8rem;
+
+    border-radius: 2em;
 
     font-size: 0.6rem;
     font-weight: 700;
@@ -15,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 
     &_selected {
         background: linear-gradient(94.53deg, #D333F9 10.41%, #F9437E 99.34%);

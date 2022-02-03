@@ -9,7 +9,7 @@ export default function CardAttributes(props) {
         attributes = [],
         cardAttribute = "",
         defaultIndex = 0,
-        attributesCount,
+        attributesCount = 10,
     } = props;
 
     const [selectIndex, setSelectIndex] = useState(0);
@@ -37,7 +37,7 @@ export default function CardAttributes(props) {
     return (
         <div className="card-attributes disable-select">
             <div
-                className="card-attributes__button pointer"
+                className="card-attributes__button card-attributes__button_left pointer"
                 onClick={onLeftClick}
             >
                 <svg
@@ -55,34 +55,37 @@ export default function CardAttributes(props) {
                 </svg>
             </div>
 
-        
-            {attributes.map((attribute, index) => {
-                return (
-                    <div
-                        onClick={() => onAttributeClick(index)}
-                    >
-                        {cardAttribute === "color" ? (
-                            <CardAttributeColor
-                                key={attribute}
-                                value={attribute}
-                                isDefault={index === defaultIndex && isDefault}
-                                isSelected={index === selectIndex}
-                            />
-                        ) : cardAttribute === "size" &&
-                          index < attributesCount ? (
-                            <CardAttributeSize
-                                key={attribute}
-                                value={attribute}
-                                isDefault={index === defaultIndex && isDefault}
-                                isSelected={index === selectIndex}
-                            />
-                        ) : null}
-                    </div>
-                );
-            })}
+            <div className="card-attributes__items">
+                {attributes.map((attribute, index) => {
+                    return (
+                        <div onClick={() => onAttributeClick(index)}>
+                            {cardAttribute === "color" ? (
+                                <CardAttributeColor
+                                    key={attribute}
+                                    value={attribute}
+                                    isDefault={
+                                        index === defaultIndex && isDefault
+                                    }
+                                    isSelected={index === selectIndex}
+                                />
+                            ) : cardAttribute === "size" &&
+                              index < attributesCount ? (
+                                <CardAttributeSize
+                                    key={attribute}
+                                    value={attribute}
+                                    isDefault={
+                                        index === defaultIndex && isDefault
+                                    }
+                                    isSelected={index === selectIndex}
+                                />
+                            ) : null}
+                        </div>
+                    );
+                })}
+            </div>
 
             <div
-                className="card-attributes__button pointer"
+                className="card-attributes__button card-attributes__button_right pointer"
                 onClick={onRigthClick}
             >
                 <svg

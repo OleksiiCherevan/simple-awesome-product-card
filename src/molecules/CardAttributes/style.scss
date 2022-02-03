@@ -1,5 +1,4 @@
-@import './../../assets/scss/main.scss';
-
+@import "./../../assets/scss/main.scss";
 
 .card-attributes {
     flex: 1;
@@ -9,6 +8,21 @@
     align-items: center;
 
     margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    &__items {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: row;
+
+        height: 1.6rem;
+        flex-wrap: wrap;
+
+        overflow: hidden;
+        gap: 0.4rem;
+    }
 
     &__button {
         height: toRem(24);
@@ -19,13 +33,11 @@
         align-items: center;
 
         &_left {
-        
+            padding-right: 0.4rem;
         }
-    
-        &_right {
 
+        &_right {
+            padding-left: 0.4rem;
         }
     }
-
-   
 }
