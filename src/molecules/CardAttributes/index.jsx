@@ -8,7 +8,7 @@ export default function CardAttributes(props) {
     const {
         attributes = [],
         cardAttribute = "",
-        defaultIndex = 1,
+        defaultIndex = 0,
         attributesCount = 10,
     } = props;
 
@@ -36,7 +36,7 @@ export default function CardAttributes(props) {
         index = selectIndex + 1 < currentAttributes.length ? index + 1 : 0;
 
         let oldAttributes = [...currentAttributes];
-        let shiftAttributes = oldAttributes.splice(0, index - 1);
+        let shiftAttributes = oldAttributes.splice(0, index);
         let newAttributes = oldAttributes.concat(shiftAttributes);
 
         setCurrentAttributes(newAttributes);
@@ -46,7 +46,7 @@ export default function CardAttributes(props) {
     const onAttributeClick = (index) => {
         if (index > selectIndex) {
             let oldAttributes = [...currentAttributes];
-            let shiftAttributes = oldAttributes.splice(0, index - 1);
+            let shiftAttributes = oldAttributes.splice(0, index);
             let newAttributes = oldAttributes.concat(shiftAttributes);
             setCurrentAttributes(newAttributes);
         } else {
