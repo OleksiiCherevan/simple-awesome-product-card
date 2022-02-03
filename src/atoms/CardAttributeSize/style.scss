@@ -18,7 +18,7 @@
 
     &_selected {
         background: linear-gradient(94.53deg, #D333F9 10.41%, #F9437E 99.34%);
-        backdrop-filter: blur(30px);
+        backdrop-filter: blur(toRem(30));
     }
 
     &_default {

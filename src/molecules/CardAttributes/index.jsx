@@ -5,7 +5,7 @@ import CardAttributeColor from "../../atoms/CardAttributeColor";
 import CardAttributeSize from "../../atoms/CardAttributeSize";
 
 export default function CardAttributes(props) {
-    const { attributes = [], cardAttribute = "", defaultIndex = 0 } = props;
+    const { attributes = [], cardAttribute = "", defaultIndex = 0, attributesCount  } = props;
 
     const [selectIndex, setSelectIndex] = useState(0);
     const [isDefault, setIsDefault] = useState(true);
@@ -51,6 +51,7 @@ export default function CardAttributes(props) {
             </div>
 
             {attributes.map((attribute, index) => {
+                console.log(attributesCount);
                 return (
                     <div onClick={() => onAttributeClick(index)}>
                         {cardAttribute === "color" ? (
@@ -59,7 +60,7 @@ export default function CardAttributes(props) {
                                 isDefault={index === defaultIndex && isDefault }
                                 isSelected={index === selectIndex}
                             />
-                        ) : cardAttribute === "size" ? (
+                        ) : (cardAttribute === "size" && index < attributesCount) ? (
                             <CardAttributeSize
                                 value={attribute}
                                 isDefault={index === defaultIndex && isDefault} 

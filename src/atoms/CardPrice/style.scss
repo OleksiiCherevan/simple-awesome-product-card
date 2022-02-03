@@ -11,7 +11,7 @@
 
     background: rgba(255, 255, 255, 0.09);
     color: white;
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(toRem(30));
     border-radius: toRem(1.5) toRem(5) toRem(5) toRem(1.5) ;
 
     &__label {
