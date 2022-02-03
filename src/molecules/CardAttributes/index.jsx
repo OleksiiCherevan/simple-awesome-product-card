@@ -8,31 +8,54 @@ export default function CardAttributes(props) {
     const {
         attributes = [],
         cardAttribute = "",
-        defaultIndex = 0,
+        defaultIndex = 1,
         attributesCount = 10,
     } = props;
 
-    const [selectIndex, setSelectIndex] = useState(0);
+    const [selectIndex, setSelectIndex] = useState(defaultIndex);
     const [isDefault, setIsDefault] = useState(true);
+    const [currentAttributes, setCurrentAttributes] = useState(attributes) 
 
     const onLeftClick = () => {
         let index = selectIndex;
-        index = index - 1 >= 0 ? index - 1 : attributes.length - 1;
-        setSelectIndex(index);
+        index = index - 1 >= 0 ? index - 1 : currentAttributes.length - 1;
+
+        let oldAttributes = [...currentAttributes]
+        let shiftAttributes = oldAttributes.splice(oldAttributes.length-1, oldAttributes.length )
+        let newAttributes = shiftAttributes.concat(oldAttributes)
+        
+        setCurrentAttributes(newAttributes)
         setIsDefault(false);
     };
 
     const onRigthClick = () => {
         let index = selectIndex;
-        index = selectIndex + 1 < attributes.length ? index + 1 : 0;
-        setSelectIndex(index);
+        index = selectIndex + 1 < currentAttributes.length ? index + 1 : 0;
+      
+        let oldAttributes = [...currentAttributes]
+        let shiftAttributes = oldAttributes.splice(0, index-1 )
+        let newAttributes = oldAttributes.concat(shiftAttributes)
+
+
+        setCurrentAttributes(newAttributes)
         setIsDefault(false);
     };
 
     const onAttributeClick = (index) => {
-        setSelectIndex(index);
+
+        let oldAttributes = [...currentAttributes]
+        let shiftAttributes = oldAttributes.splice(0, index-1 )
+        let newAttributes = oldAttributes.concat(shiftAttributes)
+
+        // setSelectIndex(index);
+
+        setCurrentAttributes(newAttributes)
         setIsDefault(false);
     };
+
+    useEffect(() => {
+       
+    }, [selectIndex])
 
     return (
         <div className="card-attributes disable-select">
@@ -56,7 +79,7 @@ export default function CardAttributes(props) {
             </div>
 
             <div className="card-attributes__items">
-                {attributes.map((attribute, index) => {
+                {currentAttributes.map((attribute, index) => {
                     return (
                         <div onClick={() => onAttributeClick(index)}>
                             {cardAttribute === "color" ? (
